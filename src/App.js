@@ -7,7 +7,8 @@ import RecipeDetails from './Components/RecipeDetails'
 export default class App extends Component {
   state={
     recipes : recipes,
-    url : 'https://www.food2fork.com/api/search?key=08205ce5e66a94eabe16ae3e402ea812&q'
+    url : 'https://www.food2fork.com/api/search?key=08205ce5e66a94eabe16ae3e402ea812&q',
+    details_id: 35382
   }
 
 
@@ -32,8 +33,8 @@ export default class App extends Component {
     console.log(this.state.recipes)
     return (
       <React.Fragment>
-       <RecipeList recipes= {this.state.recipes}/>
-       <RecipeDetails/>
+       {/* <RecipeList recipes= {this.state.recipes}/> */}
+       <RecipeDetails id = {this.state.details_id}/>
       </React.Fragment>
     );
   }
