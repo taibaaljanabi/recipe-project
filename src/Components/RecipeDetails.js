@@ -34,9 +34,12 @@ export default class RecipeDetails extends Component {
  try{
       const data =  await fetch(url)
       const jsonData = await data.json()
-      this.setState({
-        recipe : jsonData.recipe
-      })
+      this.setState((state, props)=>{
+        return {recipe : jsonData.recipe}
+      },
+      ()=>{}
+
+      )
     
     }catch(error){
      console.log(error)
@@ -47,19 +50,23 @@ export default class RecipeDetails extends Component {
   
   render() {
     const {
-      image_url,
+       image_url,
        publisher, 
        publisher_url, 
        source_url, 
        title, 
        ingredients
       } = this.state.recipe
+
+      const {handelIndex} = this.props
     return (
      <React.Fragment>
          <div className='container'>
          <div className='row'>
          <div className = 'col-10 mx-auto col-md-6 my-3'>
-         <button type = 'button' className='btn btn-warning mb-5 text-capitalize'> back to recipe list</button>
+         <button type = 'button' className='btn btn-warning mb-5 text-capitalize'
+         onClick = {()=>{handelIndex(1)}}
+          > back to recipe list</button>
          <img src = {image_url} className = 'd-block w-100' alt = 'recipe'/>
          </div>
          <div className = 'col-10 mx-auto col-md-6 my-3'><h6 className='text-uppercase'>{title}</h6>
