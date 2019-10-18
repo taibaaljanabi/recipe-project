@@ -8,7 +8,7 @@ export default class App extends Component {
   state={
     recipes : recipes,
     url : 'https://www.food2fork.com/api/search?key=08205ce5e66a94eabe16ae3e402ea812&q',
-    details_id: 35382
+    details_id: 35386
   }
 
 
