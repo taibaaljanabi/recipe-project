@@ -34,7 +34,8 @@ export default class App extends Component {
     switch (index){
       default:
       case 1:
-      return (<RecipeList recipes= {this.state.recipes}/>)
+      return (<RecipeList recipes= {this.state.recipes} handelDetails = 
+      {this.handelDetails}/>)
       case 0:
       return (<RecipeDetails id = {this.state.details_id} handelIndex = {this.handelIndex}/>)
     }
@@ -44,6 +45,12 @@ export default class App extends Component {
       index : index
     })
 
+  }
+  handelDetails  = (index,id) =>{
+    this.setState({
+      index: index,
+      details_id: id
+    })
   }
 
   render() {

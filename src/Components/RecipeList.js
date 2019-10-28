@@ -7,6 +7,7 @@ import { recipe } from '../tempDetails';
 export default class RecipeList extends Component {
   render() {
     const {recipes} = this.props
+    
     return (
      <React.Fragment>
          <RecipeSearch/>
