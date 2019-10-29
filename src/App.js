@@ -8,9 +8,12 @@ export default class App extends Component {
   state = {
     recipes : recipes,
     url : 'https://www.food2fork.com/api/search?key=08205ce5e66a94eabe16ae3e402ea812&q',
+    baseUrl: 'https://www.food2fork.com/api/search?key=08205ce5e66a94eabe16ae3e402ea812&q',
     details_id: 35389,
     index: 1,
-    value: ""
+    search: "",
+    query: '&q=',
+    error:''
   }
 
 
@@ -19,17 +22,26 @@ export default class App extends Component {
     try{
       const data =  await fetch(this.state.url)
       const jsonData = await data.json()
-      this.setState({
-        recipes : jsonData.recipes
-      })
-    
+      console.log(jsonData)
+
+      if (jsonData.recipes.length == 0){
+        this.setState(()=>{
+          return {error:'Sorry, but your search did not show any result'}
+        })
+      }else{
+      this.setState(
+        ()=>{
+          return {recipes: jsonData.recipes}
+        }
+      )
+      }
     }catch(error){
      console.log(error)
     }
   }
-  // componentDidMount(){
-  //   this.getRecipes()
-  // } 
+  componentDidMount(){
+    this.getRecipes()
+  } 
 
   displayPage = index => {
     switch (index){
@@ -41,6 +53,7 @@ export default class App extends Component {
          value = {this.state.value} 
          handelChange = {this.handelChange}
          handelSubmit = {this.handelSubmit}
+         error = {this.state.error}
       />)
       case 0:
       return (<RecipeDetails 
@@ -62,12 +75,25 @@ export default class App extends Component {
       details_id: id
     })
   }
-  handelChange = (e) =>{
-    console.log('you are handeling the change')
+  handelChange = e =>{
+   this.setState(
+     {
+     search: e.target.value
+     },
+      () => {
+     console.log(this.state.search)
+     }
+   )
   }
-  handelSubmit = (e)=>{
+  handelSubmit = e =>{
     e.preventDefault()
-    console.log('you are handeling the submit')
+    const {query, baseUrl, search} = this.state
+    this.setState(()=>{
+      return {url: `${baseUrl} ${query} ${search}`, search :'' }
+    }, ()=>{
+      this.getRecipes()
+    })
+
   }
 
 

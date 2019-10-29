@@ -6,7 +6,7 @@ import { recipe } from '../tempDetails';
 
 export default class RecipeList extends Component {
   render() {
-    const {recipes, handelDetails, value, handelChange, handelSubmit} = this.props
+    const {recipes, handelDetails, value, handelChange, handelSubmit, error} = this.props
   
     
     return (
@@ -21,8 +21,8 @@ export default class RecipeList extends Component {
          </div>
          {/* end of title*/}
          <div className='row'>
-         {
-           recipes.map(recipe =>{
+         {error?<h1 className='text-warning text-center'>{error}</h1>:
+         recipes.map(recipe =>{
              return (
                <Recipe key={recipe.recipe_id}
                       recipe = {recipe} handelDetails = {
@@ -31,6 +31,7 @@ export default class RecipeList extends Component {
                       />
              )
            })}
+         
          </div>
          </div>
      </React.Fragment>

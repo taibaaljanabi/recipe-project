@@ -21,6 +21,7 @@ export default class RecipeSearch extends Component {
          placeholder='chicken,onion,carrots'
          className='form-control'
          onChange = {handelChange}
+         value = {value}
          />
          <div className='input-group-append'>
          <button type='submit'
