@@ -6,11 +6,12 @@ import { recipe } from '../tempDetails';
 
 export default class RecipeList extends Component {
   render() {
-    const {recipes} = this.props
+    const {recipes, handelDetails, value, handelChange, handelSubmit} = this.props
+  
     
     return (
      <React.Fragment>
-         <RecipeSearch/>
+         <RecipeSearch value = {value} handelChange = {handelChange} handelSubmit = {handelSubmit}/>
          <div className = 'container my-5'>
          {/*title*/}
          <div className = 'row'>
@@ -24,7 +25,10 @@ export default class RecipeList extends Component {
            recipes.map(recipe =>{
              return (
                <Recipe key={recipe.recipe_id}
-               recipe = {recipe}/>
+                      recipe = {recipe} handelDetails = {
+                      ()=>handelDetails(0,recipe.recipe_id)
+                }
+                      />
              )
            })}
          </div>

@@ -9,7 +9,7 @@ export default class Recipe extends Component {
             publisher,
             recipe_id
         } = this.props.recipe
-
+        const {handelDetails} = this.props
 
         return (
         <React.Fragment>
@@ -24,7 +24,7 @@ export default class Recipe extends Component {
           <h6 className='text-warning text-slanted'>provided by {publisher}</h6>
           </div>
           <div className='card-footer'>
-          <button type= 'button' className = 'btn btn-primary text-capitalize'> details</button>
+          <button type= 'button' className = 'btn btn-primary text-capitalize' onClick={handelDetails}> details</button>
           <a 
           href = {source_url} className='btn btn-success mx-2 text-capitalize'
           target='_blank'

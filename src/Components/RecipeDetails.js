@@ -58,7 +58,7 @@ export default class RecipeDetails extends Component {
        ingredients
       } = this.state.recipe
 
-      const {handelIndex} = this.props
+    const {handelIndex} = this.props
     return (
      <React.Fragment>
          <div className='container'>

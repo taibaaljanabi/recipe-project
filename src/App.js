@@ -5,16 +5,17 @@ import RecipeList from './Components/RecipeList'
 import RecipeDetails from './Components/RecipeDetails'
 
 export default class App extends Component {
-  state={
+  state = {
     recipes : recipes,
     url : 'https://www.food2fork.com/api/search?key=08205ce5e66a94eabe16ae3e402ea812&q',
     details_id: 35389,
-    index: 0
+    index: 1,
+    value: ""
   }
 
 
 
-  async  getRecipes(){
+  async  getRecipes() {
     try{
       const data =  await fetch(this.state.url)
       const jsonData = await data.json()
@@ -26,32 +27,49 @@ export default class App extends Component {
      console.log(error)
     }
   }
-  componentDidMount(){
-    this.getRecipes()
-  } 
+  // componentDidMount(){
+  //   this.getRecipes()
+  // } 
 
-  displayPage = index =>{
+  displayPage = index => {
     switch (index){
       default:
       case 1:
-      return (<RecipeList recipes= {this.state.recipes} handelDetails = 
-      {this.handelDetails}/>)
+      return (<RecipeList 
+         recipes = {this.state.recipes}
+         handelDetails = {this.handelDetails}
+         value = {this.state.value} 
+         handelChange = {this.handelChange}
+         handelSubmit = {this.handelSubmit}
+      />)
       case 0:
-      return (<RecipeDetails id = {this.state.details_id} handelIndex = {this.handelIndex}/>)
+      return (<RecipeDetails 
+        id = {this.state.details_id} 
+        handelIndex = {this.handelIndex}
+        />)
     }
   }
-  handelIndex = index =>{
+  handelIndex = index => {
     this.setState({
       index : index
     })
 
   }
-  handelDetails  = (index,id) =>{
+
+  handelDetails  = (index,id) => {
     this.setState({
       index: index,
       details_id: id
     })
   }
+  handelChange = (e) =>{
+    console.log('you are handeling the change')
+  }
+  handelSubmit = (e)=>{
+    e.preventDefault()
+    console.log('you are handeling the submit')
+  }
+
 
   render() {
     console.log(this.state.recipes)
